@@ -3,17 +3,13 @@ class Pages extends Controller
 {
 	public function __construct()
 	{
-		// !!! Only for testing the connection to the database
-		$this->postModel = $this->model('Post');
+
 	}
 
 	public function index()
 	{
-		$posts = $this->postModel->getPosts();
-
 		$data = [
-			'title' => 'Welcome',
-			'posts' => $posts
+			'title' => 'Basic PHP MVC structure'
 		];
 
 		$this->view('pages/index', $data);
