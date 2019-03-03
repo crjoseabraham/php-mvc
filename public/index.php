@@ -1,5 +1,5 @@
 <?php
-require_once '../app/bootstrap.php';
 
-// Init Core Library
-$init = new Core;
+require_once dirname(dirname(__FILE__)) . '/vendor/autoload.php';
+
+$init = new Core\Router;

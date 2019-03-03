@@ -1,4 +1,5 @@
 <?php
+namespace Controllers;
 /**
  * Base Controller
  * Loads the models and views
