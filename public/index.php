@@ -1,5 +1,4 @@
 <?php
+require_once dirname(__DIR__) . '/vendor/autoload.php';
 
-require_once dirname(dirname(__FILE__)) . '/vendor/autoload.php';
-
-$init = new Core\Router;
+Router::load(APPROOT . '/src/app/routes.php')->direct(getUri(), getMethod());
