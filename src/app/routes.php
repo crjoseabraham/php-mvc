@@ -1,8 +1,8 @@
 <?php 
 
-$router->get('', 'Index@get');
-$router->post('add-task', 'Task@add');
-$router->get('add-task', 'Task@get');
-$router->post('delete-task', 'Task@delete');
-$router->post('mark-task', 'Task@markTask');
-$router->get('404', 'Index@error404');
+$router->addRoute('', ['controller' => 'Index', 'action' => 'home']);
+$router->addRoute('about', ['controller' => 'Index', 'action' => 'about']);
+$router->addRoute('{controller}/{action}');
+$router->addRoute('{controller}/{action}/{id:\d+}');
+$router->addRoute('{controller}/{id:\d+}/{action}');
+$router->setParams(getUri());

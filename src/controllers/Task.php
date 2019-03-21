@@ -3,13 +3,13 @@ namespace Controllers;
 
 class Task
 {
-	public function get()
+	public function get($data)
 	{
-		echo "Task->get";
+		var_dump($data);
 	}
 
 	public function add()
 	{
-		echo "Task->add";
+		echo "Task->add <br>";
 	}
 }

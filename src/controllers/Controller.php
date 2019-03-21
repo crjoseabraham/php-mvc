@@ -1,11 +1,11 @@
 <?php
 namespace Controllers;
+
 /**
  * Base Controller
- * Loads the models and views
+ * Loads models and views
  */
-
-class Controller
+abstract class Controller
 {
 	/**
 	 * Instantiate a model

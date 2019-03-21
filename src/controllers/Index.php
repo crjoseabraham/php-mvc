@@ -3,13 +3,18 @@ namespace Controllers;
 
 class Index extends Controller
 {
-	public function get()
+	public function home()
 	{
-		echo "Homepage";
+		echo "<h1> Homepage </h1>";
+	}
+
+	public function about()
+	{
+		echo "<h1> About </h1>";
 	}
 
 	public function error404()
 	{
-		echo "Not found.";
+		echo "<h1> Not found </h1>";
 	}
 }

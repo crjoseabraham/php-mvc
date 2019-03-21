@@ -1,4 +1,6 @@
 <?php
+namespace App;
+
 /**
  * Router Class
  * Set initial routes
@@ -6,17 +8,15 @@
  */
 class Router
 {
-	private $routes = [
-		'GET' => [],
-		'POST' => []
-	];
+	private $routes = [];
+	private $params = [];
 
 	/**
-	 * Load routes.php file
+	 * Method used to load routes.php file
 	 * @param  string $file Path to file
-	 * @return object       Instance of router in order to use the other methods
+	 * @return Router       Instance of router in order to use the other methods
 	 */
-	public static function load(string $file)
+	public static function load(string $file) : Router
 	{
 		$router = new static;
 
@@ -26,65 +26,94 @@ class Router
 	}
 
 	/**
-	 * Register a GET route
-	 * @param  string $uri        Full route like 'task/add-task'
-	 * @param  string $controller Controller and action, e.g: Task@add-task
+	 * Register a route
+	 * Process to convert the route (string) to a regular expression in order to have a more flexible router
+	 * @param  string $route      Route string, either full route or regular expression
+	 * @param  array  $params	  This array stores 'controller' and 'action of each route (if passed)
 	 * @return void
 	 */
-	public function get(string $uri, string $controller) : void
+	public function addRoute(string $route, array $params = []) : void
 	{
-		$this->routes['GET'][$uri] = $controller;
+		// Escape forward slashes
+		$route = preg_replace('/\//', '\\/', $route);
+
+		// Convert variables e.g. {controller}
+		$route = preg_replace('/\{([a-z]+)\}/', '(?P<\1>[a-z-]+)', $route);
+
+		// Convert variables with custom regular expressions e.g. {id:\d+} for numbers
+		$route = preg_replace('/\{([a-z]+):([^\}]+)\}/', '(?P<\1>\2)', $route);
+
+		// Add start and end delimeter
+		$route = '/^' . $route . '$/i';
+
+		$this->routes[$route] = $params;
 	}
 
 	/**
-	 * Register a POST route
+	 * This is where you set the controller and action taken from the URI (like 'posts/add')
+	 * ... and save those into $this->params
+	 * This method is called in routes.php
 	 * @param  string $uri        Full route like 'task/add-task'
-	 * @param  string $controller Controller and action, e.g: Task@add-task
 	 * @return void
 	 */
-	public function post($uri, $controller) : void
+	public function setParams(string $uri) : void
 	{
-		$this->routes['POST'][$uri] = $controller;
-	}
-
-	/**
-	 * Load requested URI's associated controller method
-	 * @param  string $uri        Full route like 'task/add-task'
-	 * @param  string $method 	  GET or POST
-	 * @return void
-	 */
-	public function direct($uri, $method)
-	{
-		// Remove first part of URI which is 'php-basic-mvc'
-		// Then, the string for the desired controller will be at 0 index
-		array_shift($uri);
-
-		if (empty($uri))
+		// Store parameters for current 'controller' and 'action'
+		foreach ($this->routes as $route => $params) 
 		{
-			return $this->callAction('Index', 'get');
+			if (preg_match($route, $uri, $matches)) 
+			{
+				
+				foreach ($matches as $key => $match) 
+				{
+					if (is_string($key)) 
+					{
+						if ($key === 'controller') 
+						{
+							$match = ucwords($match);
+						}
+
+						$params[$key] = $match;
+					}
+				}
+
+				$this->params = $params;
+			}
 		}
+	}
 
-		if (array_key_exists($uri[0], $this->routes[$method])) 
+	/**
+	 * Call requested controller->action()
+	 * At this point $this->params is = ['controller' => 'MyController', 'action' => 'desiredMethod', 'id' => 1]
+	 * So first check if such 'controller' exists and 'action' is a callable method
+	 * If so, then unset 'controller' and 'action', which leaves $this->params = ['id' => 1]
+	 * And last, the desired function is called with all the parameters (array) like 'id'... 
+	 * ... and this can be used or not if the method doesn't receive any arguments 
+	 */
+	public function redirectTo() : void
+	{
+		$controller = '\\Controllers\\' . $this->params['controller'];
+		$action = $this->params['action'];
+		
+		if (class_exists($controller)) 
 		{
-			return $this->callAction(
-				...explode('@', $this->routes[$method][$uri[0]])
-			);
-		} 
+			$controller = new $controller;
+			unset($this->params['controller']);
+
+			if (is_callable([$controller, $action])) 
+			{
+				unset($this->params['action']);
+			}
+			else
+			{
+				die('Page not found.');
+			}
+		}
 		else 
 		{
-			return $this->callAction(
-				...explode('@', $this->routes[$method]['404'])
-			);
+			header('location: ' . URLROOT);
 		}
-		
-		throw new Exception('No route defined for this URI.');
-	}
 
-	private function callAction($controller, $action)
-	{
-		$controller = "Controllers\\{$controller}";
-		$controller = new $controller;
-
-		return $controller->$action();
+		call_user_func_array([$controller, $action], [$this->params]);
 	}
 }
