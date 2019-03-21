@@ -24,17 +24,18 @@ abstract class Controller
 	 * @param  array  $data Passing vars to the view
 	 * @return void
 	 */
-	public function view(string $view, array $data = []) : void
+	public static function view(string $view) : void
 	{
+		$file = APPROOT . '/src/views/' . $view . '.php';
 		// Check for view file
-		if (file_exists('../app/views/' . $view . '.php'))
+		if (is_readable($file))
 		{
-			require_once '../app/views/' . $view . '.php';
+			require_once $file;
 		}
 		else
 		{
 			// View does not exist
-			die('View does not exist');
+			die('<h1> 404 Page not found </h1>');
 		}
 	}
 }

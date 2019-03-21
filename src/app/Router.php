@@ -104,6 +104,7 @@ class Router
 			if (is_callable([$controller, $action])) 
 			{
 				unset($this->params['action']);
+				unset($this->params['namespace']);
 			}
 			else
 			{

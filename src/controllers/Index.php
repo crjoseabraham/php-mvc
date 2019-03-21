@@ -5,16 +5,11 @@ class Index extends Controller
 {
 	public function home()
 	{
-		echo "<h1> Homepage </h1>";
+		Controller::view('Index/home');
 	}
 
 	public function about()
 	{
-		echo "<h1> About </h1>";
-	}
-
-	public function error404()
-	{
-		echo "<h1> Not found </h1>";
+		Controller::view('Index/about');
 	}
 }
