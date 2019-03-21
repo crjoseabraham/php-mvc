@@ -38,10 +38,10 @@ class Router
 		$route = preg_replace('/\//', '\\/', $route);
 
 		// Convert variables e.g. {controller}
-		$route = preg_replace('/\{([a-z]+)\}/', '(?P<\1>[a-z-]+)', $route);
+		$route = preg_replace('/\{([a-z0-9]+)\}/', '(?P<\1>[a-z0-9-]+)', $route);
 
 		// Convert variables with custom regular expressions e.g. {id:\d+} for numbers
-		$route = preg_replace('/\{([a-z]+):([^\}]+)\}/', '(?P<\1>\2)', $route);
+		$route = preg_replace('/\{([a-z0-9]+):([^\}]+)\}/', '(?P<\1>\2)', $route);
 
 		// Add start and end delimeter
 		$route = '/^' . $route . '$/i';
@@ -89,12 +89,13 @@ class Router
 	 * If so, then unset 'controller' and 'action', which leaves $this->params = ['id' => 1]
 	 * And last, the desired function is called with all the parameters (array) like 'id'... 
 	 * ... and this can be used or not if the method doesn't receive any arguments 
+	 * @return void
 	 */
 	public function redirectTo() : void
 	{
-		$controller = '\\Controllers\\' . $this->params['controller'];
+		$controller = $this->getNamespace() . $this->params['controller'];
 		$action = $this->params['action'];
-		
+
 		if (class_exists($controller)) 
 		{
 			$controller = new $controller;
@@ -115,5 +116,21 @@ class Router
 		}
 
 		call_user_func_array([$controller, $action], [$this->params]);
+	}
+
+	/**
+	 * Get the namespace for the requested controller class
+	 * @return string $namespace String for the complete namespace
+	 */
+	private function getNamespace() : string
+	{
+		$namespace = '\\Controllers\\';
+
+		if (array_key_exists('namespace', $this->params))
+		{
+			$namespace .= $this->params['namespace'] . '\\';
+		}
+
+		return $namespace;
 	}
 }
