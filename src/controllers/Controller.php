@@ -24,8 +24,10 @@ abstract class Controller
 	 * @param  array  $data Passing vars to the view
 	 * @return void
 	 */
-	public static function view(string $view) : void
+	public static function view(string $view, array $data = []) : void
 	{
+		extract($data, EXTR_SKIP);
+		
 		$file = APPROOT . '/src/views/' . $view . '.php';
 		// Check for view file
 		if (is_readable($file))

@@ -9,12 +9,12 @@ $router->addRoute('{controller}/{action}');
 $router->addRoute('{controller}/{action}/{id:\d+}');
 $router->addRoute('{controller}/{id:\d+}/{action}');
 
-// Routes in folder controllers/module1/ (Namespace \Controllers\Module1)
-$router->addRoute('module1/{controller}/{action}', ['namespace' => 'Module1']);
-$router->addRoute('module1/{controller}/{id:\d+}/{action}', ['namespace' => 'Module1']);
+// Routes in folder controllers/folder1/ (Namespace \Controllers\Folder1)
+$router->addRoute('folder1/{controller}/{action}', ['namespace' => 'Folder1']);
+$router->addRoute('folder1/{controller}/{id:\d+}/{action}', ['namespace' => 'Folder1']);
 
-// Routes in folder controllers/module2/ (Namespace \Controllers\Module2)
-$router->addRoute('module2/{controller}/{action}', ['namespace' => 'Module2']);
-$router->addRoute('module2/{controller}/{id:\d+}/{action}', ['namespace' => 'Module2']);
+// Routes in folder controllers/folder2/ (Namespace \Controllers\Folder2)
+$router->addRoute('folder2/{controller}/{action}', ['namespace' => 'Folder2']);
+$router->addRoute('folder2/{controller}/{id:\d+}/{action}', ['namespace' => 'Folder2']);
 
 $router->setParams(getUri());

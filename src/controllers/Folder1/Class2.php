@@ -1,5 +1,5 @@
 <?php
-namespace Controllers\Module1;
+namespace Controllers\Folder1;
 
 use \Controllers\Controller;
 
