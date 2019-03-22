@@ -1,4 +1,8 @@
 <?php 
+namespace Models;
+
+use \PDO;
+
 /**
  * PDO Database Class
  * Connect to database

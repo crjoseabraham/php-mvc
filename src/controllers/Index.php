@@ -1,15 +1,15 @@
 <?php
 namespace Controllers;
 
-class Index extends Controller
+class Index
 {
 	public function home()
 	{
-		Controller::view('Index/home');
+		view('Index/home');
 	}
 
 	public function about()
 	{
-		Controller::view('Index/about');
+		view('Index/about');
 	}
 }

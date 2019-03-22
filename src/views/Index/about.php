@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>About</title>
-</head>
-<body>
+<?php require_once APPROOT . '/src/views/include/header.php'; ?>
     <h1>About Us</h1>
-    <p>Detailed info goes here</p>
-</body>
-</html>
+    <p>This is 'About us' page</p>
+<?php require_once APPROOT . '/src/views/include/footer.php'; ?>

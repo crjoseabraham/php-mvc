@@ -1,13 +1,11 @@
 <?php
 namespace Controllers\Folder2;
 
-use \Controllers\Controller;
-
 /**
  * ModuleClass file
  * For example for large projects with many folders (modules)
  */
-class Class2 extends Controller
+class Class2
 {
     public function index($data)
     {
