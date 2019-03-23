@@ -8,6 +8,7 @@
         <input type="submit" value="Add task">
     </form>
     <h3>[READ] Get all tasks:</h3>
+
     <ul>
         <? foreach ($data as $task) : ?>
             <li> 
@@ -15,10 +16,14 @@
                      <strike> <?= $task->description; ?> </strike> &emsp;
                 <? else : ?>
                     <?= $task->description; ?> &emsp;
-                    <a href="<?= URLROOT; ?>/test/<?= $task->id; ?>/mark-read">Mark as done</a> | 
+                    <form action="<?= URLROOT; ?>/test/<?= $task->id; ?>/mark-done" method="post">
+                        <input type="submit" value="Mark as done">
+                    </form>
                 <? endif; ?>
                 
-                <a href="<?= URLROOT; ?>/test/<?= $task->id; ?>/delete">Delete</a>
+                <form action="<?= URLROOT; ?>/test/<?= $task->id; ?>/delete" method="post">
+                    <input type="submit" value="Delete">
+                </form>                
             </li>
         <? endforeach; ?>
     </ul>

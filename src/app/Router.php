@@ -91,7 +91,7 @@ class Router
 	 * ... and this can be used or not if the method doesn't receive any arguments 
 	 * @return void
 	 */
-	public function redirectTo() : void
+	public function redirect() : void
 	{
 		$controller = $this->getNamespace() . $this->params['controller'];
 		$action = $this->capitalizeAction($this->params['action']);
