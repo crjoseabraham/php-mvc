@@ -1,7 +1,7 @@
 <?php 
 /**
  * Get URI path.
- * Returns a string.
+ * @return string $uri  Sanitized URI
  */
 function getUri() : string
 {

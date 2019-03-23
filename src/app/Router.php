@@ -94,7 +94,7 @@ class Router
 	public function redirectTo() : void
 	{
 		$controller = $this->getNamespace() . $this->params['controller'];
-		$action = $this->params['action'];
+		$action = $this->capitalizeAction($this->params['action']);
 
 		if (class_exists($controller)) 
 		{
@@ -133,5 +133,23 @@ class Router
 		}
 
 		return $namespace;
+	}
+
+	/**
+	 * Camel case the 'action' string
+	 * If in the URL the action is something like '{controller}/add-new-task'...
+	 * ... change it to 'addNewTask' in order to make it match with a class method
+	 * @param string $action Get the 'action' from the URL
+	 * @return string 		 Camel Cased 'action' string
+	 */
+	private function capitalizeAction(string $action) : string
+	{
+		$action = explode('-', $action);
+
+		for($i=1; $i < count($action); $i++){
+			$action[$i] = ucwords($action[$i]);
+		}
+
+		return implode($action);
 	}
 }
