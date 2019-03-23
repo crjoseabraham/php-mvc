@@ -1,5 +1,9 @@
 # Pure PHP Ready to use MVC structure
-This is a personal project I made to teach myself how MVC works so I can use it for future projects
+This is a personal project I made to teach myself how MVC works so I can use it for future projects. Some of the topics I learnt by doing this:  
+- MVC pattern and OOP
+- WTH is a Router and how does that work?
+- How to use regular expressions
+- Handling databases with PDO
 
 ## Installation
 1. Download as .zip or clone this repo using  
@@ -33,3 +37,9 @@ php-mvc/
     .htaccess           # Redirect everything to public/ folder
     composer.json       # Composer dependency file
 ```
+
+## Acknowledgements
+I did this by making a combination of what I learnt from some online PHP courses I took  
+- [The PHP Practitioner](https://github.com/laracasts/The-PHP-Practitioner-Full-Source-Code) by Laracasts
+- [Write PHP like a Pro](https://github.com/daveh/php-mvc) by Dave Hollingworth
+- [Object Oriented PHP & MVC](https://www.udemy.com/object-oriented-php-mvc/) by Brad Traversy
