@@ -1,5 +1,5 @@
 # Pure PHP Ready to use MVC structure
-This is a personal project I made to teach myself how MVC works so I can use it for future projects. Some of the topics I learnt by doing this:  
+This is a personal project I made to teach myself how MVC works so I can use it for future projects. I did it by taking portions of code from different PHP courses I took (see **Acknowledgements** below). Some of the topics I learnt by doing this:  
 - MVC pattern and OOP
 - WTH is a Router and how does that work?
 - How to use regular expressions
