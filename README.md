@@ -12,7 +12,7 @@ This is a personal project I made to teach myself how MVC works so I can use it 
 3. Install composer  
 https://getcomposer.org/download/
 4. Run `composer install`
-3. Start your Apache server and go to http://localhost/php-mvc  
+3. Start your Apache server and go to http://localhost/php-basic-mvc  
 
 Your done :)
 
