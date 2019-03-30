@@ -10,21 +10,21 @@
     <h3>[READ] Get all tasks:</h3>
 
     <ul>
-        <? foreach ($data as $task) : ?>
+        <?php foreach($data as $task): ?>
             <li> 
-                <? if ($task->completed) : ?> 
+                <?php if ($task->completed): ?> 
                      <strike> <?= $task->description; ?> </strike> &emsp;
-                <? else : ?>
+                <?php else : ?>
                     <?= $task->description; ?> &emsp;
                     <form action="<?= URLROOT; ?>/test/<?= $task->id; ?>/mark-done" method="post">
                         <input type="submit" value="Mark as done">
                     </form>
-                <? endif; ?>
+                <?php endif; ?>
                 
                 <form action="<?= URLROOT; ?>/test/<?= $task->id; ?>/delete" method="post">
                     <input type="submit" value="Delete">
                 </form>                
             </li>
-        <? endforeach; ?>
+        <?php endforeach; ?>
     </ul>
 <?php require_once APPROOT . '/src/views/include/footer.php'; ?>
