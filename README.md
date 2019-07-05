@@ -14,7 +14,7 @@ https://getcomposer.org/download/
 4. Run `composer install`
 3. Start your Apache server and go to http://localhost/php-basic-mvc  
 
-Your done :)
+You're done :)
 
 ## Project structure
 As most MVC frameworks, this project flows through `public/index.php` and loads the correspondant page base on the URL
