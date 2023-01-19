@@ -1,14 +1,20 @@
 {
-    "name": "bram0/php-basic-mvc",
+    "name": "lloticas/topping-site",
     "authors": [
         {
             "name": "Jose Abraham Castillo",
             "email": "crjoseabraham@gmail.com"
         }
     ],
-	"autoload": {
-		"files": ["config/constants.php", "config/credentials.php", "config/utilities.php"],
-		"classmap": ["src/"]
-	},
+    "autoload": {
+        "files": [
+            "config/constants.php",
+            "config/credentials.php",
+            "config/utilities.php"
+        ],
+        "classmap": [
+            "src/"
+        ]
+    },
     "require": {}
 }

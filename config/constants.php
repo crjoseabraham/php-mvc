@@ -2,7 +2,7 @@
 // App Root
 define('APPROOT', dirname(dirname(__FILE__)));
 // URL Root
-define('URLROOT', 'http://localhost/php-basic-mvc');
+define('URLROOT', 'http://localhost/php-mvc');
 // Site Name
 define('SITENAME', 'PHP Basic MVC');
 
